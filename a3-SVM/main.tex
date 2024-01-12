@@ -1,0 +1,128 @@
+\documentclass[12pt]{article}
+
+% \usepackage[ngerman]{babel}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{csquotes}
+\usepackage{ulem}
+\usepackage{amsmath}
+% \usepackage{hyperref}  % use if clickable references wished
+
+% pdfLaTeX font configurations
+\usepackage[T1]{fontenc}
+\usepackage[mono,vvarbb,upint]{notomath}
+
+% % for CJK characters, compile with XeLaTeX
+% \usepackage{fontspec}
+% \usepackage[vvarbb,upint]{notomath}
+% \setmonofont{Noto Sans Mono}
+% \usepackage{xeCJK}
+% \setCJKmainfont{Noto Serif CJK TC}
+
+\usepackage[height=9in,width=7in,
+  top=68pt,headheight=28pt,headsep=20pt,
+  heightrounded]{geometry}
+\linespread{1.25}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+
+\fancyhead[L]{Hanxin Xia - 3417418 $\vert$ Vittorio Ciccarelli - 3203477 $\vert$ Anna Stein - 2934420\\Aufgabe 1 im Aufgabenblatt 3}
+\fancyhead[R]{QMdCL: Grundlagen des maschinellen Lernens}
+\fancyfoot[C]{\thepage}
+
+% customize section title font
+\usepackage{titlesec}
+\titleformat{\section}{\normalsize\bfseries}{\thesection}{1em}{}
+
+% citation settings
+\usepackage{natbib}
+\makeatletter
+\DeclareRobustCommand\citep
+{\begingroup\NAT@swatrue\let\NAT@ctype\z@\NAT@partrue
+  \@ifstar{\NAT@fulltrue\NAT@citetp}{\NAT@fullfalse\NAT@citetp}}
+\makeatother
+
+\usepackage{qtree}
+\usepackage{forest}
+\forestset{qtree/.style={baseline, for tree={parent anchor=south,
+  child anchor=north,align=center,inner sep=0pt}}}
+\useforestlibrary{linguistics}
+\forestapplylibrarydefaults{linguistics}
+
+\usepackage{gb4e}
+\setlength{\glossglue}{15pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\noindent \textbf{i}
+
+\begin{multicols}{2}
+\noindent
+\begin{math}
+  \displaystyle
+  x_1 \times x_1: (1, 2) \times (1, 2) = 1 \times 1 + 2 \times 2 = 5\\
+  x_1 \times x_2: (1, 2) \times (-2, 1) = 1 \times -2 + 2 \times 1 = 0\\
+  x_1 \times x_3: (1, 2) \times (-1, -2) = 1 \times -1 + 2 \times -2 = -5\\
+  x_1 \times x_4: (1, 2) \times (2, -1) = 1 \times 2 + 2 \times -1 = 0\\
+\end{math}
+
+\noindent
+\begin{math}
+  \displaystyle
+  x_2 \times x_1: (-2, 1) \times (1, 2) = -2 \times 1 + 1 \times 2 = 0\\
+  x_2 \times x_2: (-2, 1) \times (-2, 1) = -2 \times -2 + 1 \times 1 = 5\\
+  x_2 \times x_3: (-2, 1) \times (-1, -2) = -2 \times -1 + 1 \times -2 = 0\\
+  x_2 \times x_4: (-2, 1) \times (2, -1) = -2 \times 2 + 1 \times -1 = -5\\
+\end{math}
+
+\noindent
+\begin{math}
+  \displaystyle
+  x_3 \times x_1: (-1, -2) \times (1, 2) = -1 \times 1 + -2 \times 2 = -5\\
+  x_3 \times x_2: (-1, -2) \times (-2, 1) = -1 \times -2 + -2 \times 1 = 0\\
+  x_3 \times x_3: (-1, -2) \times (-1, -2) = -1 \times -1 + -2 \times -2 = 5\\
+  x_3 \times x_4: (-1, -2) \times (2, -1) = -1 \times 2 + -2 \times -1 = 0\\
+\end{math}
+
+\noindent
+\begin{math}
+  \displaystyle
+  x_4 \times x_1: (2, -1) \times (1, 2) = 2 \times 1 + -1 \times 2 = 0\\
+  x_4 \times x_2: (2, -1) \times (-2, 1) = 2 \times -2 + -1 \times 1 = -5\\
+  x_4 \times x_3: (2, -1) \times (-1, -2) = 2 \times -1 + -1 \times -2 = 0\\
+  x_4 \times x_4: (2, -1) \times (2, -1) = 2 \times 2 + -1 \times -1 = 5\\
+\end{math}
+
+\columnbreak
+
+\null \vfill
+\[
+\Longrightarrow \qquad
+\begin{bmatrix}
+  \hphantom{-}5 & \hphantom{-}0 &            -5 & \hphantom{-}0\\
+  \hphantom{-}0 & \hphantom{-}5 & \hphantom{-}0 &            -5\\
+             -5 & \hphantom{-}0 & \hphantom{-}5 & \hphantom{-}0\\
+  \hphantom{-}0 &            -5 & \hphantom{-}0 & \hphantom{-}5
+\end{bmatrix}
+\]
+\vfill \null
+\end{multicols}
+
+
+\vspace{20pt}
+
+\noindent \textbf{ii} --- anotherthing anotherthing \bigbreak
+
+
+
+
+{\setstretch{1.00}
+\bibliographystyle{chicago}
+\bibliography{references}}
+
+\end{document}
