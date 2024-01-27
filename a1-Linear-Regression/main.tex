@@ -1,0 +1,186 @@
+\documentclass[12pt]{article}
+
+% \usepackage[ngerman]{babel}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{csquotes}
+\usepackage{ulem}
+\usepackage{amsmath}
+% \usepackage{hyperref}  % use if clickable references wished
+
+% pdfLaTeX font configurations
+\usepackage[T1]{fontenc}
+\usepackage[mono,vvarbb,upint]{notomath}
+
+% % for CJK characters, compile with XeLaTeX
+% \usepackage{fontspec}
+% \usepackage[vvarbb,upint]{notomath}
+% \setmonofont{Noto Sans Mono}
+% \usepackage{xeCJK}
+% \setCJKmainfont{Noto Serif CJK TC}
+
+\usepackage[height=9in,width=7in,
+  top=68pt,headheight=28pt,headsep=20pt,
+  heightrounded]{geometry}
+\linespread{1.25}
+\setlength\parindent{0pt}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+
+\fancyhead[L]{Hanxin Xia - 3417418 $\vert$ Vittorio Ciccarelli - 3203477 $\vert$ Anna Stein - 2934420\\Aufgabe 1 im Aufgabenblatt 3}
+\fancyhead[R]{QMdCL: Grundlagen des maschinellen Lernens}
+\fancyfoot[C]{\thepage}
+
+% customize section title font
+\usepackage{titlesec}
+\titleformat{\section}{\normalsize\bfseries}{\thesection}{1em}{}
+
+% citation settings
+\usepackage{natbib}
+\makeatletter
+\DeclareRobustCommand\citep
+{\begingroup\NAT@swatrue\let\NAT@ctype\z@\NAT@partrue
+  \@ifstar{\NAT@fulltrue\NAT@citetp}{\NAT@fullfalse\NAT@citetp}}
+\makeatother
+
+\usepackage{qtree}
+\usepackage{forest}
+\forestset{qtree/.style={baseline, for tree={parent anchor=south,
+  child anchor=north,align=center,inner sep=0pt}}}
+\useforestlibrary{linguistics}
+\forestapplylibrarydefaults{linguistics}
+
+\usepackage{gb4e}
+\setlength{\glossglue}{15pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\textbf{i}
+
+\begin{multicols}{2}
+
+\begin{math}
+  \displaystyle
+  x_1 \times x_1: (1, 2) \times (1, 2) = 1 \times 1 + 2 \times 2 = 5\\
+  x_1 \times x_2: (1, 2) \times (-2, 1) = 1 \times -2 + 2 \times 1 = 0\\
+  x_1 \times x_3: (1, 2) \times (-1, -2) = 1 \times -1 + 2 \times -2 = -5\\
+  x_1 \times x_4: (1, 2) \times (2, -1) = 1 \times 2 + 2 \times -1 = 0\\
+\end{math}
+
+\begin{math}
+  \displaystyle
+  x_2 \times x_1: (-2, 1) \times (1, 2) = -2 \times 1 + 1 \times 2 = 0\\
+  x_2 \times x_2: (-2, 1) \times (-2, 1) = -2 \times -2 + 1 \times 1 = 5\\
+  x_2 \times x_3: (-2, 1) \times (-1, -2) = -2 \times -1 + 1 \times -2 = 0\\
+  x_2 \times x_4: (-2, 1) \times (2, -1) = -2 \times 2 + 1 \times -1 = -5\\
+\end{math}
+
+\begin{math}
+  \displaystyle
+  x_3 \times x_1: (-1, -2) \times (1, 2) = -1 \times 1 + -2 \times 2 = -5\\
+  x_3 \times x_2: (-1, -2) \times (-2, 1) = -1 \times -2 + -2 \times 1 = 0\\
+  x_3 \times x_3: (-1, -2) \times (-1, -2) = -1 \times -1 + -2 \times -2 = 5\\
+  x_3 \times x_4: (-1, -2) \times (2, -1) = -1 \times 2 + -2 \times -1 = 0\\
+\end{math}
+
+\begin{math}
+  \displaystyle
+  x_4 \times x_1: (2, -1) \times (1, 2) = 2 \times 1 + -1 \times 2 = 0\\
+  x_4 \times x_2: (2, -1) \times (-2, 1) = 2 \times -2 + -1 \times 1 = -5\\
+  x_4 \times x_3: (2, -1) \times (-1, -2) = 2 \times -1 + -1 \times -2 = 0\\
+  x_4 \times x_4: (2, -1) \times (2, -1) = 2 \times 2 + -1 \times -1 = 5\\
+\end{math}
+
+\columnbreak
+
+\null \vfill
+\[
+\Longrightarrow \qquad
+\begin{bmatrix}
+  \hphantom{-}5 & \hphantom{-}0 &            -5 & \hphantom{-}0\\
+  \hphantom{-}0 & \hphantom{-}5 & \hphantom{-}0 &            -5\\
+             -5 & \hphantom{-}0 & \hphantom{-}5 & \hphantom{-}0\\
+  \hphantom{-}0 &            -5 & \hphantom{-}0 & \hphantom{-}5
+\end{bmatrix}
+\]
+\vfill \null
+\end{multicols}
+
+
+\textbf{ii}
+
+Lagrange function for a hard margin SVM:
+
+\[
+  L(w,b,\alpha) = \frac{1}{2}\Vert w \Vert^2 -\sum_{i=1}^N \alpha_i[y_i (w^Tx_i+b) -1]
+\]
+
+Partial derivations for $w, b, \alpha$:
+
+\vspace{-3mm}
+\begin{flalign*}
+  \frac{\sigma L}{\sigma w} &= w - \sum_{i=1}^N \alpha_i y_i x_i = 0 &&\\
+  \frac{\sigma L}{\sigma b} &= - \sum_{i=1}^N \alpha_i y_i = 0 &&\\
+  \frac{\sigma L}{\sigma \alpha} &= y_i (w^T x_i + b) - 1 = 0
+\end{flalign*}
+\newpage
+
+Substitute $w, b$ into the third equation:
+
+\vspace{-3mm}
+\begin{flalign*}
+  y_i ((\sum_{j=1}^N \alpha_j y_j x_j)^T x_i + \frac{1}{N}\sum_{j=1}^N (\alpha_j y_j x_j)^T x_i) -1 = 0 &&
+\end{flalign*}
+
+Calculate  $\alpha$ for $x_1 = [5, 0, -5, 0]$ and $y_1 = 1$ using:
+
+\vspace{-3mm}
+\begin{flalign*}
+  \alpha_i = \frac{1}{y_i x^T x_i} &&
+\end{flalign*}
+
+we get:
+
+\vspace{-3mm}
+\begin{flalign*}
+  \alpha_1 &= \frac{1}{1 \times (5^2 + 0^2 + (-5)^2 + 0^2)} &&\\
+    & ~=~
+  \frac{1}{1 \times (25 + 0 + 25 + 0)} &&\\
+    & ~=~
+  \frac{1}{50}
+\end{flalign*}
+
+Similarly, we get $\alpha_2 = \infty$, $\alpha_3 = \frac{1}{50}$, $\alpha_4 = \infty$.
+
+Hence $\alpha* = (0.02, \infty, 0.02, \infty)$.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{\setstretch{1.00}
+\bibliographystyle{chicago}
+\bibliography{references}}
+
+\end{document}
